@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Picture</title>
+<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row">
+<img class="col-md-6" src="http://lorempixel.com/600/550" alt="http://lorempixel.com/600/400">
+<div class="col-md-6 container">
+<h1 id="h">Add Comment</h1>
+<form id="up" method=post action="/">
+	<input id="upid" name="ID" hidden>
+	<input id="User_Name" name="User_Name" class="form-control" type="text" placeholder="Your Name" required>
+	<textarea id="User_Comment" name="User_Comment" class="form-control" placeholder="Your Comment"></textarea>
+	<input id="savebtn" class="btn btn-primary" type="submit" value="Comment">
+</form>
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Comment</th>
+	</tr>
+	<% for(var i=userlist.length-1;i>=0;i--){%>
+	<% var name= userlist[i].UserName %>
+	<% var comment= userlist[i].UserComment %>
+	<tr>
+		<td><%=name%></td>
+		<td><%=comment%></td>
+		<td>
+			<form method=post action="/ind">
+				<input name="ID" value=<%=userlist[i].ID%> hidden>
+				<input class="btn btn-danger" type="submit" name="Delete" value="Delete">
+			</form>
+		</td>
+		<td>
+			<form>
+				<input class="btn btn-primary" type="button" name="Update" value="Update" onclick="javascript:update('<%=name%>','<%=comment%>',<%=userlist[i].ID%>)">
+			</form>
+		</td>
+	</tr>
+	<% } %>
+</table>
+</div>
+</div>
+<script>
+	function update(name,comment,id)
+	{
+		document.getElementById("savebtn").value="Update";
+		document.getElementById("User_Name").value=name;
+		document.getElementById("User_Comment").value=comment;
+		document.getElementById("up").action="/index";
+		document.getElementById("upid").value=id;
+		document.getElementById("h").innerHTML="Update Comment";
+	}
+</script>
+</body>
+</html>
