@@ -1,1 +1,129 @@
 <html>
+<head>
+<title>Login</title>
+<link rel=stylesheet href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+/*
+$(function() {
+    $('#submit').on('click',function(event) {
+        event.preventDefault(); // Stops browser from navigating away from page
+        var data;
+        // build a json object or do something with the form, store in data
+        $.post('login.ejs', data, function(resp) {
+            alert(resp);
+            // do something when it was successful
+        });
+    });
+});
+/*
+$('#formlogin').on('submit', function(e){
+    e.preventDefault();
+    $.ajax({
+       type: "POST",
+       url: "login",
+       data: $(this).serialize(),
+       success: function(r) {
+         alert(r);
+       }
+    });
+});*/
+$(document).ready(function(){
+        $("#submitsignup").on('click', function(e){
+            $.ajax({
+                url: '/signup', // url where to submit the request
+                type : 'post', // type of action POST || GET
+                //dataType : 'json', // data type
+                data : $("#formsignup").serialize(), // post data || get data
+                success : function(result) {
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+
+        });
+    });
+
+
+
+$(document).ready(function(){
+        $("#submit").on('click', function(e){
+            $.ajax({
+                url: '/log', // url where to submit the request
+                type : 'post', // type of action POST || GET
+                //dataType : 'json', // data type
+                data : $("#formlogin").serialize(), // post data || get data
+                success : function(result) {
+                	window.location.href = '/';
+              
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+            })
+        });
+    });
+/*
+$(document).ready(function()
+        $("#submitsignup").on('click', function(e){
+            $.ajax({
+                url: '/login', // url where to submit the request
+                type : 'post', // type of action POST || GET
+                //dataType : 'json', // data type
+                data : $("#formsignup").serialize(), // post data || get data
+                success : function(result) {
+                },
+                error: function(xhr, resp, text) {
+                    console.log(xhr, resp, text);
+                }
+                }
+            })
+        });
+    });
+/*
+ var myform = document.getElementById("formlogin");
+    var fd = new FormData(myform);
+    $.ajax({
+        url: "login",
+        data: fd,
+        cache: false,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (result) {
+            alert(result);
+        }
+    });
+    */
+</script>
+</head>
+<body>
+<div class="row">
+<img class="col-md-6" src="http://lorempixel.com/600/550" alt="http://lorempixel.com/600/550">
+<div class="col-md-6 container">
+<h1>Login Page</h1>
+<br>
+<h3>Login</h3>
+<form id="formlogin">
+	<input name="User_Name" class="form-control" type="email" placeholder="User Name (E-Mail)" required>
+	<input name="Password" class="form-control" type="password" placeholder="Password" required>
+	<input id="submit" class="btn btn-primary" type="button" value="Login">
+</form>
+<br>
+<br>
+<br>
+<h4>Or SignUp, If not a member yet</h4>
+<br>
+<h3>Sign Up</h3>
+<form id="formsignup">
+<input name="name" class="form-control" type=text placeholder="Name" required>
+<input name="email" class="form-control" type=email placeholder="E-Mail" required>
+<input name="password" class="form-control" type=password placeholder="Password" required>
+<input id="submitsignup" class="btn btn-primary" type="button" value="SignUp">
+</form>
+</div>
+</div>
+</body>
+</html>
